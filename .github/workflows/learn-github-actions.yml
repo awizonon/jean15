@@ -7,6 +7,14 @@ jobs:
   build-image-docker:
     runs-on: self-hosted
     steps:
+        - name: stop and remove all olds containers 
+          run: docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+          working-directory: /home/vagrant/jean15
+        
+        - name: remove all olds images 
+          run: docker rmi $(docker images -q)
+          working-directory: /home/vagrant/jean15
+
         - name: build image webapp 
           run: cd /home/vagrant/jean15 && docker build -t webapp:latest .
           working-directory: /home/vagrant/jean15
