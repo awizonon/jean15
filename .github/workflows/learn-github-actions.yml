@@ -8,7 +8,10 @@ jobs:
     runs-on: self-hosted
     steps:
         - name: stop and remove all olds containers 
-          run: docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+          run: |
+            if $(docker ps -aq); then 
+                docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+            fi
           working-directory: /home/vagrant/jean15
         
           #- name: remove all olds images 
