@@ -9,7 +9,7 @@ jobs:
     steps:
         - name: stop and remove all olds containers 
           run: |
-            if $(docker ps -aq); then 
+            if [ ! -z "$(docker ps -aq)" ]; then 
                 docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
             fi
           working-directory: /home/vagrant/jean15
