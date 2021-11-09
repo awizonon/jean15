@@ -1,7 +1,7 @@
 FROM ubuntu
 MAINTAINER coco (oonerique@gmail.com)
 RUN apt-get update
-RUN apt-get install -y nginx fail2ban
+RUN apt-get install -y nginx
 EXPOSE 80
 RUN rm -rf /var/www/html/*
 #ADD static-website-example/ /var/www/html/
