@@ -8,7 +8,7 @@ jobs:
     runs-on: self-hosted
     steps:
         - name: build image webapp 
-          run: docker build -t webapp:latest .
+          run: cd /home/vagrant/jean15 && docker build -t webapp:latest .
           working-directory: /home/vagrant/jean15
         
         - name: run new image 
