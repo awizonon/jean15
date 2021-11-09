@@ -1,0 +1,12 @@
+name: learn-github-actions
+on: 
+    push:
+            branch:  
+               - docker_build_test
+jobs:
+  build-image-docker:
+    runs-on: self-hosted
+    steps:
+        - name: change directory 
+          run: echo "salut"
+          working-directory: /home/vagrant/
