@@ -16,7 +16,7 @@ jobs:
         
         - name: remove all olds images 
           run: | 
-            if [ ! -z "$(docker image -q)" ]; then      
+            if [ ! -z "$(docker images -q)" ]; then      
                  docker rmi -f $(docker images -q)
             fi
           working-directory: /home/vagrant/jean15
