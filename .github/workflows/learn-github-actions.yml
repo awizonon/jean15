@@ -7,6 +7,18 @@ jobs:
   build-image-docker:
     runs-on: self-hosted
     steps:
-        - name: change directory 
-          run: echo "salut"
-          working-directory: /home/vagrant/
+        - name: build image webapp 
+          run: docker build -t webapp:latest .
+          working-directory: /home/vagrant/jean15
+        
+        - name: run new image 
+          run: docker run --name webapp -d -p 80:80 webapp:latest
+          working-directory: /home/vagrant/jean15
+        
+        - name: tag new image 
+          run: img=$(docker images | awk '{ print $3 }' | head -2 | tail -1) && docker tag $img awizonon/webapp:latest
+          working-directory: /home/vagrant/jean15
+        
+        - name: push new image 
+          run: docker push awizonon/webapp:latest
+          working-directory: /home/vagrant/jean15
