@@ -1,0 +1,38 @@
+name: learn-github-actions
+on: 
+    push:
+            branch:  
+               - docker_build_test
+jobs:
+  build-image-docker:
+    runs-on: self-hosted
+    steps:
+        - name: stop and remove all olds containers 
+          run: |
+            if [ ! -z "$(docker ps -aq)" ]; then 
+                docker stop $(docker ps -aq) && docker rm $(docker ps -aq)
+            fi
+          working-directory: /home/vagrant/jean15
+        
+        - name: remove all olds images 
+          run: | 
+            if [ ! -z "$(docker images -q)" ]; then      
+                 docker rmi -f $(docker images -q)
+            fi
+          working-directory: /home/vagrant/jean15
+
+        - name: build image webapp 
+          run: cd /home/vagrant/jean15 && docker build -t webapp:latest .
+          working-directory: /home/vagrant/jean15
+        
+        - name: run new image 
+          run: docker run --name webapp -d -p 80:80 webapp:latest
+          working-directory: /home/vagrant/jean15
+        
+        - name: tag new image 
+          run: img=$(docker images | awk '{ print $3 }' | head -2 | tail -1) && docker tag $img awizonon/webapp:latest
+          working-directory: /home/vagrant/jean15
+        
+        - name: push new image 
+          run: docker push awizonon/webapp:latest
+          working-directory: /home/vagrant/jean15
