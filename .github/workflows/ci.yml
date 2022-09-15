@@ -1,4 +1,5 @@
-name: github-action
+#name: github-action
+name: ci
 on: [push]
 jobs:
   check-bats-version:
