@@ -4,4 +4,4 @@ jobs:
   check-bats-version:
     runs-on: [self-hosted, ci]
     steps:
-      - run: uptime && sleep 5
+      - run: uptime && sleep 5 && echo "salut"
