@@ -4,4 +4,4 @@ jobs:
   check-bats-version:
     runs-on: [self-hosted, ci]
     steps:
-      - run: uptime
+      - run: uptime && sleep 5
